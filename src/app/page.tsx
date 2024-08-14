@@ -1,34 +1,58 @@
 "use client";
 
-import React, {Suspense, useEffect, useRef, useState} from 'react';
+import React, { Suspense, useEffect, useRef, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
-import { OrbitControls } from '@react-three/drei'; // Import OrbitControls
-import Loader from '@/app/components/Loader'; // Ensure you have a loader component
-import { SpaceModel } from '@/app/components/SpaceModel'; // Adjust the import path as necessary
+import { PerspectiveCamera } from '@react-three/drei';
+import Loader from '@/app/components/Loader';
+import { SpaceModel } from '@/app/components/SpaceModel';
+import { Endurance } from '@/app/components/Endurance';
 
 export default function Home() {
     const cameraRef = useRef();
+    const [mouseY, setMouseY] = useState(0);
+    const [axis, setAxis] = useState('y');
 
+    // Handle mouse move event
     useEffect(() => {
-        if (cameraRef.current) {
-            cameraRef.current.lookAt(0, 0, 0);
-        }
+        const handleMouseMove = (event) => {
+            setMouseY(event.clientY);
+
+            if (event.clientY <= 61) {
+                setAxis('z');
+            } else {
+                setAxis('y');
+            }
+        };
+
+        window.addEventListener('mousemove', handleMouseMove);
+
+        // Clean up event listener on component unmount
+        return () => window.removeEventListener('mousemove', handleMouseMove);
     }, []);
 
+    // Calculate new positions based on mouse movement
+    const cameraPosition = [1, 2, 2 + mouseY * 0.01];
+    const endurancePosition = [0.8 + mouseY * 0.001, 1.85, 1.97 + mouseY * 0.001];
+
     return (
-        <main className="w-full h-screen relative">
+        <main className="w-full h-screen relative overflow-hidden">
             <Canvas
                 className="w-full h-screen bg-transparent"
-                camera={{ position: [1, 2, 2], near: 0.1, far: 1000 }}
                 style={{ background: 'black' }}
+                camera={{ position: [0, 0, 0], near: 0.1, far: 1000 }} // Disable the default camera
             >
                 <Suspense fallback={<Loader />}>
                     <directionalLight position={[10, 10, 5]} intensity={2} />
                     <ambientLight intensity={0.5} />
-                    <pointLight position={[-10, -10, 5]} intensity={0.5} />
-                    <OrbitControls />
                     <SpaceModel scale={[1, 1, 1]} position={[-1, -1, 2]} />
-                    <perspectiveCamera ref={cameraRef} />
+                    <Endurance position={endurancePosition} rotation={[1, 1, 1]} scale={0.3} />
+                    <PerspectiveCamera
+                        ref={cameraRef}
+                        position={cameraPosition}
+                        near={0.1}
+                        far={1000}
+                        makeDefault // Make this the default camera
+                    />
                 </Suspense>
             </Canvas>
         </main>

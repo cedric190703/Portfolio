@@ -8,11 +8,11 @@ export function SpaceModel(props) {
         <>
             {/* Background stars */}
             <Stars
-                radius={100} // Radius of the star field
-                depth={50} // Depth of the star field
-                count={5000} // Number of stars
-                factor={4} // Multiplier for the density
-                saturation={0.2} // Saturation of the star colors
+                radius={100}
+                depth={50}
+                count={5000}
+                factor={4}
+                saturation={0.2}
                 fade
             />
 
