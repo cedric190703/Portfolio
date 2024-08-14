@@ -5,7 +5,7 @@ import Image from "next/image";
 
 const InteractionsExplanations = () => {
     return (
-        <div className="absolute left-4 top-44 p-6 bg-transparent rounded-lg shadow-lg space-y-4">
+        <div className="absolute left-4 top-60 p-6 bg-transparent rounded-lg shadow-lg space-y-4">
             <h3 className="text-xl font-semibold text-gray-400">To interact with the model you have two choices:</h3>
             <p className="text-gray-400">1. Use the keyboard:</p>
             <ul className="list-disc list-inside text-gray-400 space-y-2">

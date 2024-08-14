@@ -25,8 +25,13 @@ export default function Home() {
     const center = [-1, -1, 2];
     const radius = 2;
 
+    const [userActive, setUserActive] = useState(false);
+    const [audioInitialized, setAudioInitialized] = useState(false);
+    const [pause, setPause] = useState(false);
+
     useEffect(() => {
         const handleKeyDown = (event) => {
+            setUserActive(true);
             let newPosition = [...cameraPosition];
             let newEndurancePosition = [...endurancePosition];
             let newCameraRotation = [...cameraRotation];
@@ -121,13 +126,15 @@ export default function Home() {
 
         window.addEventListener('keydown', handleKeyDown);
 
-        return () => window.removeEventListener('keydown', handleKeyDown);
+        return () => {
+            window.removeEventListener('keydown', handleKeyDown);
+        };
     }, [cameraPosition, endurancePosition, axis]);
 
     // Animation loop for rotating the Endurance component
     useEffect(() => {
         const animate = () => {
-            rotationRef.current += 0.0015; // Adjust the rotation speed as needed
+            rotationRef.current += 0.0025; // Adjust the rotation speed as needed
 
             // Calculate the new rotation angles
             const angle = rotationRef.current;
@@ -150,10 +157,9 @@ export default function Home() {
 
     const listenerRef = useRef();
     const soundRef = useRef();
-    const [audioInitialized, setAudioInitialized] = useState(false);
 
-    // Add the music to the website
     const initializeAudio = () => {
+        if (audioInitialized) return;
         const listener = new AudioListener();
         listenerRef.current = listener;
         cameraRef.current.add(listener);
@@ -176,9 +182,8 @@ export default function Home() {
         if (soundRef.current) {
             soundRef.current.stop();
         }
+        setAudioInitialized(false); // Reset audio initialization state
     }
-
-    const [pause, setPause] = useState(false);
 
     const pauseAudio = () => {
         if (soundRef.current) {
@@ -191,20 +196,9 @@ export default function Home() {
         }
     }
 
-    useEffect(() => {
-        if (audioInitialized) return;
-
-        const handleUserInteraction = () => {
-            initializeAudio();
-            window.removeEventListener('click', handleUserInteraction);
-        };
-
-        window.addEventListener('click', handleUserInteraction);
-
-        return () => {
-            window.removeEventListener('click', handleUserInteraction);
-        };
-    }, [audioInitialized]);
+    const handleShowInstructions = () => {
+        setUserActive(!userActive);
+    }
 
     return (
         <main className="w-full h-screen relative overflow-hidden">
@@ -234,7 +228,9 @@ export default function Home() {
                 </Suspense>
             </Canvas>
             <button
-                onClick={initializeAudio}
+                onClick={() => {
+                    if (!audioInitialized) initializeAudio();
+                }}
                 className="absolute w-32 top-4 left-4 z-10 cursor-pointer p-2 rounded bg-black text-white border-solid border-2 border-amber-50"
             >
                 Start Audio
@@ -244,7 +240,7 @@ export default function Home() {
                 onClick={pauseAudio}
                 className="absolute w-32 top-16 left-4 z-10 cursor-pointer p-2 rounded bg-black text-white border-solid border-2 border-amber-50"
             >
-                Pause Audio
+                {pause ? 'Play Audio' : 'Pause Audio'}
             </button>
 
             <button
@@ -252,6 +248,13 @@ export default function Home() {
                 className="absolute w-32 top-28 left-4 z-10 cursor-pointer p-2 rounded bg-black text-white border-solid border-2 border-amber-50"
             >
                 Stop Audio
+            </button>
+
+            <button
+                onClick={handleShowInstructions}
+                className="absolute w-32 top-40 left-4 z-10 cursor-pointer p-2 rounded bg-black text-white border-solid border-2 border-amber-50"
+            >
+                { userActive ? 'Show instructions' : 'Hide instructions' }
             </button>
 
             <button
@@ -267,7 +270,7 @@ export default function Home() {
             >
                 Projects
             </button>
-            <InteractionsExplanations />
+            { !userActive && <InteractionsExplanations/> }
             <Presentation/>
         </main>
     );
