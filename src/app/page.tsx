@@ -7,7 +7,8 @@ import Loader from '@/app/components/Loader';
 import { SpaceModel } from '@/app/components/models/SpaceModel';
 import { Endurance } from '@/app/components/models/Endurance';
 import { AudioLoader, AudioListener, Audio } from 'three';
-import {log} from "node:util";
+import Presentation from "@/app/components/Presentation";
+import InteractionsExplanations from "@/app/components/InteractionsExplanations";
 
 export default function Home() {
     const cameraRef = useRef();
@@ -252,6 +253,22 @@ export default function Home() {
             >
                 Stop Audio
             </button>
+
+            <button
+                onClick={pauseAudio}
+                className="absolute w-32 top-4 right-4 z-10 cursor-pointer p-2 rounded bg-black text-white border-solid border-2 border-amber-50"
+            >
+                About me
+            </button>
+
+            <button
+                onClick={stopAudio}
+                className="absolute w-32 top-16 right-4 z-10 cursor-pointer p-2 rounded bg-black text-white border-solid border-2 border-amber-50"
+            >
+                Projects
+            </button>
+            <InteractionsExplanations />
+            <Presentation/>
         </main>
     );
 }
