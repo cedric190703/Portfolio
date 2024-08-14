@@ -4,8 +4,10 @@ import React, { Suspense, useEffect, useRef, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, PerspectiveCamera } from '@react-three/drei';
 import Loader from '@/app/components/Loader';
-import { SpaceModel } from '@/app/components/SpaceModel';
-import { Endurance } from '@/app/components/Endurance';
+import { SpaceModel } from '@/app/components/models/SpaceModel';
+import { Endurance } from '@/app/components/models/Endurance';
+import { AudioLoader, AudioListener, Audio } from 'three';
+import {log} from "node:util";
 
 export default function Home() {
     const cameraRef = useRef();
@@ -145,23 +147,81 @@ export default function Home() {
         return () => cancelAnimationFrame(animate);
     }, []);
 
+    const listenerRef = useRef();
+    const soundRef = useRef();
+    const [audioInitialized, setAudioInitialized] = useState(false);
+
+    // Add the music to the website
+    const initializeAudio = () => {
+        const listener = new AudioListener();
+        listenerRef.current = listener;
+        cameraRef.current.add(listener);
+
+        const sound = new Audio(listener);
+        soundRef.current = sound;
+
+        const audioLoader = new AudioLoader();
+        audioLoader.load('/music/universe.mp3', (buffer) => {
+            sound.setBuffer(buffer);
+            sound.setLoop(true);
+            sound.setVolume(0.5);
+            sound.play();
+        });
+
+        setAudioInitialized(true);
+    };
+
+    const stopAudio = () => {
+        if (soundRef.current) {
+            soundRef.current.stop();
+        }
+    }
+
+    const [pause, setPause] = useState(false);
+
+    const pauseAudio = () => {
+        if (soundRef.current) {
+            if (pause) {
+                soundRef.current.play();
+            } else {
+                soundRef.current.pause();
+            }
+            setPause(!pause);
+        }
+    }
+
+    useEffect(() => {
+        if (audioInitialized) return;
+
+        const handleUserInteraction = () => {
+            initializeAudio();
+            window.removeEventListener('click', handleUserInteraction);
+        };
+
+        window.addEventListener('click', handleUserInteraction);
+
+        return () => {
+            window.removeEventListener('click', handleUserInteraction);
+        };
+    }, [audioInitialized]);
+
     return (
         <main className="w-full h-screen relative overflow-hidden">
             <Canvas
                 className="w-full h-screen bg-transparent"
-                style={{ background: 'black' }}
-                camera={{ position: [0, 0, 0], near: 0.1, far: 1000 }}
+                style={{background: 'black'}}
+                camera={{position: [0, 0, 0], near: 0.1, far: 1000}}
             >
-                <Suspense fallback={<Loader />}>
-                    <directionalLight position={[10, 10, 5]} intensity={2} />
-                    <ambientLight intensity={0.5} />
-                    <SpaceModel scale={[1, 1, 1]} position={center} />
+                <Suspense fallback={<Loader/>}>
+                    <directionalLight position={[10, 10, 5]} intensity={2}/>
+                    <ambientLight intensity={0.5}/>
+                    <SpaceModel scale={[1, 1, 1]} position={center}/>
                     <Endurance
                         position={endurancePosition}
                         rotation={enduranceRotation}
                         scale={0.3}
                     />
-                    <OrbitControls />
+                    <OrbitControls/>
                     <PerspectiveCamera
                         ref={cameraRef}
                         position={cameraPosition}
@@ -172,6 +232,26 @@ export default function Home() {
                     />
                 </Suspense>
             </Canvas>
+            <button
+                onClick={initializeAudio}
+                className="absolute w-32 top-4 left-4 z-10 cursor-pointer p-2 rounded bg-black text-white border-solid border-2 border-amber-50"
+            >
+                Start Audio
+            </button>
+
+            <button
+                onClick={pauseAudio}
+                className="absolute w-32 top-16 left-4 z-10 cursor-pointer p-2 rounded bg-black text-white border-solid border-2 border-amber-50"
+            >
+                Pause Audio
+            </button>
+
+            <button
+                onClick={stopAudio}
+                className="absolute w-32 top-28 left-4 z-10 cursor-pointer p-2 rounded bg-black text-white border-solid border-2 border-amber-50"
+            >
+                Stop Audio
+            </button>
         </main>
     );
 }
