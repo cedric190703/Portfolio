@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import { useGLTF } from '@react-three/drei';
 
 export function Endurance({ position = [0, 0, 0], rotation = [0, 0, 0], scale = 1 }) {
-    const { nodes, materials } = useGLTF('/models/interstellar__endurance.glb')
+    const { nodes, materials } = useGLTF('/models/interstellar__endurance.glb');
     return (
         <group dispose={null} position={position} rotation={rotation}  scale={scale}>
             <group scale={0.01}>
