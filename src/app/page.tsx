@@ -8,6 +8,7 @@ import { SpaceModel } from '@/app/components/models/SpaceModel';
 import { Endurance } from '@/app/components/models/Endurance';
 import { AudioLoader, AudioListener, Audio } from 'three';
 import Presentation from "@/app/components/Presentation";
+import Link from "next/link";
 import InteractionsExplanations from "@/app/components/InteractionsExplanations";
 
 export default function Home() {
@@ -257,19 +258,23 @@ export default function Home() {
                 { userActive ? 'Show instructions' : 'Hide instructions' }
             </button>
 
-            <button
-                onClick={pauseAudio}
-                className="absolute w-32 top-4 right-4 z-10 cursor-pointer p-2 rounded bg-black text-white border-solid border-2 border-amber-50"
-            >
-                About me
-            </button>
+            <Link href="/about" passHref legacyBehavior>
+                <a href="#" className="cursor-pointer">
+                    <button className="absolute w-32 top-4 right-4 z-10 cursor-pointer p-2 rounded bg-black text-white border-solid border-2 border-amber-50"
+                    >
+                        About me
+                    </button>
+                </a>
+            </Link>
 
-            <button
-                onClick={stopAudio}
-                className="absolute w-32 top-16 right-4 z-10 cursor-pointer p-2 rounded bg-black text-white border-solid border-2 border-amber-50"
-            >
-                Projects
-            </button>
+            <Link href="/projects" passHref legacyBehavior>
+                <a href="#" className="cursor-pointer">
+                    <button className="absolute w-32 top-16 right-4 z-10 cursor-pointer p-2 rounded bg-black text-white border-solid border-2 border-amber-50"
+                    >
+                        Projects
+                    </button>
+                </a>
+            </Link>
             { !userActive && <InteractionsExplanations/> }
             <Presentation/>
         </main>
