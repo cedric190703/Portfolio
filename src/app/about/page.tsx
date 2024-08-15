@@ -22,7 +22,7 @@ const About = () => {
     useEffect(() => {
         const animate = () => {
             // For the speed
-            bodyRef.current += 0.005;
+            bodyRef.current += 0.002;
 
             // Set the objects rotation
             setBodyRotation([bodyRotation[0], bodyRef.current, bodyRotation[2]]);
@@ -30,14 +30,14 @@ const About = () => {
             setComputerRotation([computerRotation[0], bodyRef.current, computerRotation[2]]);
             setDNARotation([dnaRotation[0], -bodyRef.current, dnaRotation[2]]);
 
-            requestAnimationFrame(animate);
+            return requestAnimationFrame(animate);
         };
 
-        // Start the animation
-        animate();
+        // Start the animation and store the frame ID
+        const animationFrameId = animate();
 
         // Clean up the animation loop on component unmount
-        return () => cancelAnimationFrame(animate);
+        return () => cancelAnimationFrame(animationFrameId);
     }, []);
 
     return (
@@ -61,9 +61,10 @@ const About = () => {
                            className="text-blue-500 hover:underline"> LinkedIn</a>.
                     </p>
                     <p className="text-lg mb-6 text-gray-800">
-                        you can read my blogs on
-                        <a href="https://medium.com/@cbrzyski2"
-                           className="text-blue-500 hover:underline"> Medium</a>.
+                        You can also reach me via email at
+                        <a href="mailto:cbrzyski2@gmail.com"
+                           className="text-blue-500 hover:underline"> cbrzyski2@gmail.com
+                        </a>.
                     </p>
                     <p className="text-lg mb-6 text-gray-800">
                         You can also reach me via email at

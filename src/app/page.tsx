@@ -9,12 +9,13 @@ import { Endurance } from '@/app/components/models/Endurance';
 import { AudioLoader, AudioListener, Audio } from 'three';
 import Presentation from "@/app/components/Presentation";
 import InteractionsExplanations from "@/app/components/InteractionsExplanations";
+import * as THREE from "three";
 import Link from "next/link";
 
 export default function Home() {
-    const cameraRef = useRef();
-    const [cameraPosition, setCameraPosition] = useState([1.1, 1.9, 5]);
-    const [cameraRotation, setCameraRotation] = useState([-0.3, 0, 0]);
+    const cameraRef = useRef<THREE.PerspectiveCamera | null>(null);
+    const [cameraPosition, setCameraPosition] = useState<any>([1.1, 1.9, 5]);
+    const [cameraRotation, setCameraRotation] = useState<any>([-0.3, 0, 0]);
     const [axis, setAxis] = useState('z');
     const [endurancePosition, setEndurancePosition] = useState([1, 1.8, 1]);
     const [enduranceRotation, setEnduranceRotation] = useState([2, 3, 3]);
@@ -32,7 +33,7 @@ export default function Home() {
     const [hideCard, setHideCard] = useState(false);
 
     useEffect(() => {
-        const handleKeyDown = (event) => {
+        const handleKeyDown = (event: any) => {
             setHideCard(true);
             setUserActive(true);
             let newPosition = [...cameraPosition];
@@ -155,26 +156,28 @@ export default function Home() {
             // Apply the updated rotation to Endurance
             setEnduranceRotation([xRotation, yRotation, zRotation]);
 
-            requestAnimationFrame(animate);
+            return requestAnimationFrame(animate);
         };
 
-        // Start the animation
-        animate();
+        // Start the animation and store the frame ID
+        const animationFrameId = animate();
 
         // Clean up the animation loop on component unmount
-        return () => cancelAnimationFrame(animate);
+        return () => cancelAnimationFrame(animationFrameId);
     }, []);
 
-    const listenerRef = useRef();
-    const soundRef = useRef();
+    const listenerRef = useRef<THREE.AudioListener | null>(null);
+    const soundRef = useRef<THREE.Audio | null>(null);
 
     const initializeAudio = () => {
         if (audioInitialized) return;
-        const listener = new AudioListener();
+        const listener: any = new AudioListener();
         listenerRef.current = listener;
-        cameraRef.current.add(listener);
+        if (cameraRef.current) {
+            cameraRef.current.add(listener);
+        }
 
-        const sound = new Audio(listener);
+        const sound: any = new Audio(listener);
         soundRef.current = sound;
 
         const audioLoader = new AudioLoader();

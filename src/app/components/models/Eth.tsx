@@ -1,8 +1,12 @@
 import React from 'react';
 import { useGLTF } from '@react-three/drei';
+import {Mesh} from "three";
 
-export function ETH(props) {
-    const { nodes, materials } = useGLTF('/models/ethereum_logo.glb')
+export function ETH(props: any) {
+    const { nodes, materials } = useGLTF('/models/ethereum_logo.glb');
+    
+    const logoObject_0_lambert2_0 = nodes.Ethereum_3D_logoObject_0_lambert2_0 as Mesh;
+
     return (
         <group {...props} dispose={null}>
             <group scale={0.01}>
@@ -11,7 +15,7 @@ export function ETH(props) {
                         <mesh
                             castShadow
                             receiveShadow
-                            geometry={nodes.Ethereum_3D_logoObject_0_lambert2_0.geometry}
+                            geometry={logoObject_0_lambert2_0.geometry}
                             material={materials.lambert2}
                             scale={[1, 0.655, 1]}
                         />

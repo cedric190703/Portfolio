@@ -1,6 +1,7 @@
 import React from 'react';
 import { useGLTF, Stars } from '@react-three/drei';
 import * as THREE from 'three';
+import {Mesh} from "three";
 
 // Vertex Shader
 const vertexShader = `
@@ -25,7 +26,7 @@ const fragmentShader = `
   }
 `;
 
-export function SpaceModel(props) {
+export function SpaceModel(props: any) {
     const { nodes, materials } = useGLTF('/models/need_some_space.glb');
 
     // Create a custom shader material for the gradient points
@@ -35,15 +36,19 @@ export function SpaceModel(props) {
         vertexColors: true, // Enable vertex colors
     });
 
+    const object2 = nodes.Object_2 as Mesh;
+
     // Create an array of colors for the gradient effect
     const colors = [];
-    const geometry = nodes.Object_2.geometry;
+    const geometry = object2.geometry;
     const position = geometry.attributes.position;
 
     // Calculate the center of the geometry
     const center = new THREE.Vector3();
     geometry.computeBoundingBox();
-    geometry.boundingBox.getCenter(center);
+    if (geometry.boundingBox) {
+        geometry.boundingBox.getCenter(center);
+    }
 
     for (let i = 0; i < position.count; i++) {
         const x = position.getX(i);
@@ -54,13 +59,15 @@ export function SpaceModel(props) {
         const distance = new THREE.Vector3(x, y, z).distanceTo(center);
 
         // Normalize the distance to a range of 0 to 1
-        const maxDistance = geometry.boundingBox.getSize(new THREE.Vector3()).length() / 2;
-        const normalizedDistance = Math.min(distance / maxDistance, 1.0);
+        if (geometry.boundingBox) {
+            const maxDistance = geometry.boundingBox.getSize(new THREE.Vector3()).length() / 2;
+            const normalizedDistance = Math.min(distance / maxDistance, 1.0);
 
-        // Calculate the hue value based on the normalized distance
-        const hue = 0.77 - normalizedDistance * 0.35;
-        const color = new THREE.Color().setHSL(hue, 1.2 , 0.55);
-        colors.push(color.r, color.g, color.b);
+            // Calculate the hue value based on the normalized distance
+            const hue = 0.77 - normalizedDistance * 0.35;
+            const color = new THREE.Color().setHSL(hue, 1.2, 0.55);
+            colors.push(color.r, color.g, color.b);
+        }
     }
 
     geometry.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
