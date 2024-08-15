@@ -44,7 +44,7 @@ const About = () => {
         <div className="w-full min-h-screen flex flex-col bg-gray-50 p-8 lg:p-16">
             <Header/>
             <div
-                className="w-full h-[300px] flex flex-col lg:flex-row transition-all duration-500 ease-in-out lg:mb-20 md:mb-25 sm:mb-72">
+                className="w-full h-[300px] flex flex-col lg:flex-row transition-all duration-500 ease-in-out lg:mb-20 md:mb-35 sm:mb-80">
                 <div className="w-full lg:w-1/2 h-full p-4 lg:p-8 flex flex-col justify-center">
                     <h1 className="text-5xl font-bold mb-4 text-gray-800">About Me</h1>
                     <h1 className="text-2xl mb-1">Hello! I'm a Cédric Brzyski.</h1>
@@ -53,6 +53,23 @@ const About = () => {
                     </p>
                     <p className="text-lg mb-6 text-gray-800">
                         I'm a French, and I live near Paris.
+                    </p>
+                    <p className="text-lg mb-6 text-gray-800">
+                        You can contact me via
+                        <a href="https://github.com/cedric190703" className="text-blue-500 hover:underline"> GitHub</a>,
+                        <a href="https://www.linkedin.com/in/cedric-brzyski/"
+                           className="text-blue-500 hover:underline"> LinkedIn</a>.
+                    </p>
+                    <p className="text-lg mb-6 text-gray-800">
+                        you can read my blogs on
+                        <a href="https://medium.com/@cbrzyski2"
+                           className="text-blue-500 hover:underline"> Medium</a>.
+                    </p>
+                    <p className="text-lg mb-6 text-gray-800">
+                        You can also reach me via email at
+                        <a href="mailto:your-email@example.com"
+                           className="text-blue-500 hover:underline"> your-email@example.com
+                        </a>.
                     </p>
                 </div>
                 <div className="w-full lg:w-1/2 h-full">

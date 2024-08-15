@@ -41,7 +41,7 @@ const Projects = () => {
                 <div className="w-full lg:w-3/4 p-4 lg:p-8 flex flex-col bg-gray-50 items-center text-center">
                     <h1 className="text-5xl font-bold mb-8 text-gray-800">Projects</h1>
                     <h2 className="text-2xl font-semibold mb-4 text-gray-700">I have worked on several projects</h2>
-                    <div className="w-1/2 space-y-14 bg-gray-50 shadow-xl">
+                    <div className="lg:w-3/4 md:w-3/4 sm:w-full space-y-14 bg-gray-50 shadow-xl">
                         {projectList.map((project, index) => (
                             <div key={index}
                                  className="bg-white mb-10 rounded-lg shadow-lg flex flex-col items-center text-center">
@@ -57,7 +57,7 @@ const Projects = () => {
                                     </div>
                                 )}
                                 <h3 className="text-3xl font-semibold mb-5 text-gray-900">{project.title}</h3>
-                                <p className="text-lg mb-5 text-gray-800">{project.description}</p>
+                                <p className="text-lg px-6 mb-5 text-gray-800">{project.description}</p>
                                 <a href={project.url}
                                    className="mb-5 font-semibold text-2xl text-gray-800 underline hover:text-purple-500">Github
                                     repository</a>

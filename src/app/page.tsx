@@ -8,8 +8,8 @@ import { SpaceModel } from '@/app/components/models/SpaceModel';
 import { Endurance } from '@/app/components/models/Endurance';
 import { AudioLoader, AudioListener, Audio } from 'three';
 import Presentation from "@/app/components/Presentation";
-import Link from "next/link";
 import InteractionsExplanations from "@/app/components/InteractionsExplanations";
+import Link from "next/link";
 
 export default function Home() {
     const cameraRef = useRef();
@@ -54,7 +54,7 @@ export default function Home() {
                     ];
                 } else if (axis === 'y') {
                     // Rotate around the center
-                    rotationRefYAxis.current += 0.01; // Decrease the angle decrement for faster rotation
+                    rotationRefYAxis.current += 0.004; // Decrease the angle decrement for faster rotation
                     const angle = rotationRefYAxis.current;
                     // Ensure angle wraps around after 2π radians
                     const wrappedAngle = angle % (2 * Math.PI);
@@ -91,7 +91,7 @@ export default function Home() {
                     ];
                 } else if (axis === 'y') {
                     // Rotate around the center
-                    rotationRefYAxis.current -= 0.01;
+                    rotationRefYAxis.current -= 0.004;
                     const angle = rotationRefYAxis.current;
                     // Ensure angle wraps around after 2π radians
                     const wrappedAngle = angle % (2 * Math.PI);
@@ -191,12 +191,13 @@ export default function Home() {
     const stopAudio = () => {
         if (soundRef.current) {
             soundRef.current.stop();
+            setPause(false);
         }
-        setAudioInitialized(false); // Reset audio initialization state
+        setAudioInitialized(false);
     }
 
     const pauseAudio = () => {
-        if (soundRef.current) {
+        if (soundRef.current && audioInitialized) {
             if (pause) {
                 soundRef.current.play();
             } else {
@@ -288,7 +289,6 @@ export default function Home() {
                     </Link>
                 </>
             }
-
             { !userActive && <InteractionsExplanations/> }
         </main>
     );
