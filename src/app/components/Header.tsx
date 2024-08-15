@@ -2,8 +2,8 @@ import Link from "next/link";
 
 const Header = () => {
     return (
-        <header className="lg:w-1/3 w-full rounded-lg shadow bg-gray-800 mb-14">
-            <div className="w-full max-w-screen-xl p-4 flex items-center justify-center">
+        <header className="items-center justify-center lg:w-1/3 w-full rounded-lg shadow bg-gray-800 mb-14">
+            <div className="flex-grow w-full max-w-screen-xl p-4 flex items-center justify-center">
                 <ul className="flex flex-wrap items-center justify-center mt-3 text-sm font-medium text-gray-600 dark:text-gray-400 sm:mt-0 md:space-x-6">
                     <li>
                         <Link href="/" passHref legacyBehavior>

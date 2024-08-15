@@ -1,4 +1,3 @@
-import React, { useRef } from 'react';
 import { useGLTF } from '@react-three/drei';
 
 export function Endurance({ position = [0, 0, 0], rotation = [0, 0, 0], scale = 1 }) {
