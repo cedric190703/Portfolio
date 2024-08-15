@@ -64,12 +64,10 @@ const Projects = () => {
                             </div>
                         ))}
                     </div>
-                    <div className="flex items-center mt-10">
-                        <h2 className="text-2xl font-semibold text-gray-700 mr-2">You can see more projects that I've
-                            done on my</h2>
-                        <a href="https://github.com/cedric190703"
-                           className="font-semibold text-2xl text-gray-800 underline hover:text-purple-500">Github</a>.
-                    </div>
+                    <h2 className="text-xl mt-6  font-semibold text-gray-700 mr-2">You can see more projects that I've
+                        done on my</h2>
+                    <a href="https://github.com/cedric190703"
+                       className="font-semibold text-xl text-gray-800 underline hover:text-purple-500">Github</a>.
                 </div>
             </div>
         </div>
