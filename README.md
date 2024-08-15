@@ -1,6 +1,11 @@
+# Portfolio website
+### This is a 3D portfolio with Three JS and Next JS.
+
+![UI of the Application](public/portfolio.png)
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+## How to use it
 
 First, run the development server:
 
