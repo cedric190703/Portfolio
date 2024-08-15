@@ -6,7 +6,7 @@ import Image from "next/image";
 const Presentation = () => {
     return (
         <div
-            className="absolute w-64 max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 bottom-4 right-4">
+            className="absolute w-56 max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 bottom-4 right-4">
             <div className="flex flex-col items-center pb-10">
                 <Image className="w-24 h-24 mb-3 mt-3 rounded-full shadow-lg" src={ProfilePicture}
                      alt="Profile image"/>

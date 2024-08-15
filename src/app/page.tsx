@@ -143,7 +143,8 @@ export default function Home() {
     // Animation loop for rotating the Endurance component
     useEffect(() => {
         const animate = () => {
-            rotationRef.current += 0.0025; // Adjust the rotation speed as needed
+            // For the speed
+            rotationRef.current += 0.0025;
 
             // Calculate the new rotation angles
             const angle = rotationRef.current;

@@ -8,7 +8,7 @@ const vertexShader = `
   void main() {
     vColor = color;
     vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
-    gl_PointSize = 1.28; // Adjust point size as needed
+    gl_PointSize = 1.3; // Adjust point size as needed
     gl_Position = projectionMatrix * mvPosition;
   }
 `;
@@ -59,7 +59,7 @@ export function SpaceModel(props) {
 
         // Calculate the hue value based on the normalized distance
         const hue = 0.77 - normalizedDistance * 0.35;
-        const color = new THREE.Color().setHSL(hue, 0.9, 0.55);
+        const color = new THREE.Color().setHSL(hue, 1.2 , 0.55);
         colors.push(color.r, color.g, color.b);
     }
 
