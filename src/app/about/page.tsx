@@ -6,52 +6,59 @@ import { OrbitControls } from '@react-three/drei';
 import { Computer } from '@/app/components/models/Computer';
 import { ETH } from '@/app/components/models/Eth';
 import Loader from "@/app/components/Loader";
-import { SpaceModel } from "@/app/components/models/SpaceModel";
+import {DNA} from "@/app/components/models/DNA";
+import {Body} from "@/app/components/models/Body";
 
 const About = () => {
     return (
         <div className="w-full min-h-screen flex flex-col bg-gray-50 p-8 lg:p-16">
-            {/* Section 1: About Me */}
             <div
-                className="w-full h-[300px] flex flex-col lg:flex-row transition-all duration-500 ease-in-out mb-8 lg:mb-16">
+                className="w-full h-[300px] flex flex-col lg:flex-row transition-all duration-500 ease-in-out mb-20 lg:mb-16">
                 <div className="w-full lg:w-1/2 h-full p-4 lg:p-8 flex flex-col justify-center">
                     <h1 className="text-5xl font-bold mb-4 text-gray-800">About Me</h1>
+                    <h1 className="text-2xl mb-1">Hello! I am a Cédric Brzyski.</h1>
+                    <p className="text-lg mb-1 text-gray-700">
+                        I am a student at EPITA, a french computer engineering school.
+                    </p>
                     <p className="text-lg mb-6 text-gray-700">
-                        Hello! I am a passionate individual with a background in [Your Background].
-                        I specialize in [Your Specializations] and have experience in [Your Experience].
+                        I am a French, and I live in Val-De-Marne.
                     </p>
                 </div>
                 <div className="w-full lg:w-1/2 h-full">
                     <Canvas
                         className="w-full h-full"
-                        camera={{position: [0, 0, 5], near: 0.1, far: 1000}}
-                        style={{background: 'black'}}
+                        camera={{position: [0, 0.4, 1.69], near: 0.1, far: 1000}}
                     >
                         <Suspense fallback={<Loader/>}>
                             <ambientLight intensity={0.5}/>
                             <directionalLight position={[10, 10, 5]} intensity={1}/>
-                            {/* Add your 3D models here */}
-                            <SpaceModel scale={[1, 1, 1]} position={[0, 0, 0]}/>
-                            <OrbitControls/>
+                            <Body scale={[0.1, 0.1, 0.1]} position={[0, -1, 0]}/>
+                            <OrbitControls enableZoom={false}/>
                         </Suspense>
                     </Canvas>
                 </div>
             </div>
 
-            {/* Section 2: Hobbies */}
             <div
-                className="w-full h-[300px] flex flex-col lg:flex-row-reverse transition-all duration-500 ease-in-out mt-8 mb-8 lg:mb-16">
-                {/* Text Content */}
+                className="w-full h-[300px] flex flex-col lg:flex-row-reverse transition-all duration-500 ease-in-out mt-8 mb-20 lg:mb-16">
                 <div className="w-full lg:w-1/2 h-full p-4 lg:p-8 flex flex-col justify-center">
                     <h1 className="text-5xl font-bold mb-4 text-gray-800">My Hobbies</h1>
-                    <p className="text-lg mb-6 text-gray-700">
-                        In my free time, I enjoy various hobbies such as [Hobbies]. Here’s a little more about them.
+                    <p className="text-lg mb-1 text-gray-700">
+                        In my free time, I play sports like tennis (I was ranked 4/6 in the French rankings), swimming
+                        and running.
+                    </p>
+                    <p className="text-lg mb-1 text-gray-700">
+                        I love to watch sports like football and basketball.
+                    </p>
+                    <p className="text-lg mb-1 text-gray-700">
+                        I am passionate about computer science and in computer science I am interested in Blockchain 🔗
+                        and AI 🤖.
                     </p>
                 </div>
                 <div className="w-full lg:w-1/2 h-full bg-gray-50">
                     <Canvas
                         className="w-full h-full"
-                        camera={{position: [0, 0.5, 2.3], near: 0.1, far: 1000}}
+                        camera={{position: [0, 0.5, 2.38], near: 0.1, far: 1000}}
                     >
                         <Suspense fallback={<Loader/>}>
                             <directionalLight position={[10, 10, 5]} intensity={2}/>
@@ -65,13 +72,12 @@ const About = () => {
                 </div>
             </div>
 
-            {/* Section 3: Projects */}
-            <div className="w-full h-[400px] flex flex-col lg:flex-row transition-all duration-500 ease-in-out mb-8 mt-8 lg:mb-16">
-                {/* Text Content */}
+            <div
+                className="w-full h-[400px] flex flex-col lg:flex-row transition-all duration-500 ease-in-out mb-20 mt-8 lg:mb-16">
                 <div className="w-full lg:w-1/2 h-full p-4 lg:p-8 flex flex-col justify-center">
-                    <h1 className="text-5xl font-bold mb-4 text-gray-800">My Projects</h1>
+                    <h1 className="text-5xl font-bold mb-4 text-gray-800">What I am studying</h1>
                     <p className="text-lg mb-6 text-gray-700">
-                        I have worked on various projects that showcase my skills and expertise. Here are some highlights.
+                        I am currently on the third year at EPITA and I am studying computer science
                     </p>
                 </div>
                 <div className="w-full lg:w-1/2 h-full bg-gray-50">
@@ -86,6 +92,29 @@ const About = () => {
                             <OrbitControls enableZoom={false}/>
                         </Suspense>
                     </Canvas>
+                </div>
+            </div>
+
+            <div
+                className="w-full h-[400px] flex flex-col lg:flex-row transition-all duration-500 ease-in-out mb-20 mt-8 lg:mb-16">
+                <div className="w-full lg:w-1/2 h-full bg-gray-50">
+                    <Canvas
+                        className="w-full h-full"
+                        camera={{position: [0, 0, 3.5], near: 0.1, far: 1000}}
+                    >
+                        <Suspense fallback={<Loader/>}>
+                            <directionalLight position={[10, 10, 5]} intensity={2}/>
+                            <ambientLight intensity={0.5}/>
+                            <DNA scale={[1, 1, 1]} position={[0, 0, 0]}/>
+                            <OrbitControls enableZoom={false}/>
+                        </Suspense>
+                    </Canvas>
+                </div>
+                <div className="w-full lg:w-1/2 h-full p-4 lg:p-8 flex flex-col justify-center">
+                    <h1 className="text-5xl font-bold mb-4 text-gray-800">What I want to do</h1>
+                    <p className="text-lg mb-6 text-gray-700">
+                        I am currently on the third year at EPITA and I am studying computer science
+                    </p>
                 </div>
             </div>
         </div>

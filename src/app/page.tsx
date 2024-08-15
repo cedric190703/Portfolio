@@ -29,9 +29,11 @@ export default function Home() {
     const [userActive, setUserActive] = useState(false);
     const [audioInitialized, setAudioInitialized] = useState(false);
     const [pause, setPause] = useState(false);
+    const [hideCard, setHideCard] = useState(false);
 
     useEffect(() => {
         const handleKeyDown = (event) => {
+            setHideCard(true);
             setUserActive(true);
             let newPosition = [...cameraPosition];
             let newEndurancePosition = [...endurancePosition];
@@ -125,10 +127,16 @@ export default function Home() {
             setCameraRotation(newCameraRotation);
         };
 
+        const handleKeyUp = () => {
+            setHideCard(false); // Show the card when no key is pressed
+        };
+
         window.addEventListener('keydown', handleKeyDown);
+        window.addEventListener('keyup', handleKeyUp);
 
         return () => {
             window.removeEventListener('keydown', handleKeyDown);
+            window.removeEventListener('keyup', handleKeyUp);
         };
     }, [cameraPosition, endurancePosition, axis]);
 
@@ -228,55 +236,59 @@ export default function Home() {
                     />
                 </Suspense>
             </Canvas>
-            <button
-                onClick={() => {
-                    if (!audioInitialized) initializeAudio();
-                }}
-                className="absolute w-32 top-4 left-4 z-10 cursor-pointer p-2 rounded bg-black text-white border-solid border-2 border-amber-50"
-            >
-                Start Audio
-            </button>
-
-            <button
-                onClick={pauseAudio}
-                className="absolute w-32 top-16 left-4 z-10 cursor-pointer p-2 rounded bg-black text-white border-solid border-2 border-amber-50"
-            >
-                {pause ? 'Play Audio' : 'Pause Audio'}
-            </button>
-
-            <button
-                onClick={stopAudio}
-                className="absolute w-32 top-28 left-4 z-10 cursor-pointer p-2 rounded bg-black text-white border-solid border-2 border-amber-50"
-            >
-                Stop Audio
-            </button>
-
-            <button
-                onClick={handleShowInstructions}
-                className="absolute w-32 top-40 left-4 z-10 cursor-pointer p-2 rounded bg-black text-white border-solid border-2 border-amber-50"
-            >
-                { userActive ? 'Show instructions' : 'Hide instructions' }
-            </button>
-
-            <Link href="/about" passHref legacyBehavior>
-                <a href="#" className="cursor-pointer">
-                    <button className="absolute w-32 top-4 right-4 z-10 cursor-pointer p-2 rounded bg-black text-white border-solid border-2 border-amber-50"
+            { !hideCard &&
+                <>
+                    <button
+                        onClick={() => {
+                            if (!audioInitialized) initializeAudio();
+                        }}
+                        className="absolute w-32 top-4 left-4 z-10 cursor-pointer p-2 rounded bg-black text-white border-solid border-2 border-amber-50"
                     >
-                        About me
+                        Start Audio
                     </button>
-                </a>
-            </Link>
 
-            <Link href="/projects" passHref legacyBehavior>
-                <a href="#" className="cursor-pointer">
-                    <button className="absolute w-32 top-16 right-4 z-10 cursor-pointer p-2 rounded bg-black text-white border-solid border-2 border-amber-50"
+                    <button
+                        onClick={pauseAudio}
+                        className="absolute w-32 top-16 left-4 z-10 cursor-pointer p-2 rounded bg-black text-white border-solid border-2 border-amber-50"
                     >
-                        Projects
+                        {pause ? 'Play Audio' : 'Pause Audio'}
                     </button>
-                </a>
-            </Link>
+
+                    <button
+                        onClick={stopAudio}
+                        className="absolute w-32 top-28 left-4 z-10 cursor-pointer p-2 rounded bg-black text-white border-solid border-2 border-amber-50"
+                    >
+                        Stop Audio
+                    </button>
+
+                    <button
+                        onClick={handleShowInstructions}
+                        className="absolute w-32 top-40 left-4 z-10 cursor-pointer p-2 rounded bg-black text-white border-solid border-2 border-amber-50"
+                    >
+                        { userActive ? 'Show instructions' : 'Hide instructions' }
+                    </button>
+
+                    <Presentation/>
+                    <Link href="/about" passHref legacyBehavior>
+                        <a href="#" className="cursor-pointer" onClick={stopAudio}>
+                            <button className="absolute w-32 top-4 right-4 z-10 cursor-pointer p-2 rounded bg-black text-white border-solid border-2 border-amber-50"
+                            >
+                                About me
+                            </button>
+                        </a>
+                    </Link>
+                    <Link href="/projects" passHref legacyBehavior>
+                        <a href="#" className="cursor-pointer" onClick={stopAudio}>
+                            <button className="absolute w-32 top-16 right-4 z-10 cursor-pointer p-2 rounded bg-black text-white border-solid border-2 border-amber-50"
+                            >
+                                Projects
+                            </button>
+                        </a>
+                    </Link>
+                </>
+            }
+
             { !userActive && <InteractionsExplanations/> }
-            <Presentation/>
         </main>
     );
 }
