@@ -22,7 +22,7 @@ const About = () => {
     useEffect(() => {
         const animate = () => {
             // For the speed
-            bodyRef.current += 0.002;
+            bodyRef.current += 0.003;
 
             // Set the objects rotation
             setBodyRotation([bodyRotation[0], bodyRef.current, bodyRotation[2]]);

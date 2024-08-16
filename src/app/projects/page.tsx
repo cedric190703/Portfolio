@@ -4,7 +4,7 @@ import Image from "next/image";
 import DigiitLogo from '../../../public/projects/digiit.png';
 import AloaLogo from '../../../public/projects/logoAloa.jpg';
 import MoleculeLogo from '../../../public/projects/MoleculeVisualization.png';
-import Logo from '../../../public/icons/icon.svg';
+import Logo from '../../../public/icons/icon.png';
 
 const Projects = () => {
     const projectList = [
@@ -64,10 +64,10 @@ const Projects = () => {
                             </div>
                         ))}
                     </div>
-                    <h2 className="text-xl mt-6  font-semibold text-gray-700 mr-2">You can see more projects that I've
+                    <h2 className="text-2xl mt-8 font-semibold text-gray-700 mr-2">You can see more projects that I've
                         done on my</h2>
                     <a href="https://github.com/cedric190703"
-                       className="font-semibold text-xl text-gray-800 underline hover:text-purple-500">Github</a>.
+                       className="font-semibold text-2xl mt-2 text-gray-800 underline hover:text-purple-500">Github</a>
                 </div>
             </div>
         </div>
