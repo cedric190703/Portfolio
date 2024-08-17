@@ -55,7 +55,7 @@ export default function Home() {
                     ];
                 } else if (axis === 'y') {
                     // Rotate around the center
-                    rotationRefYAxis.current += 0.004; // Decrease the angle decrement for faster rotation
+                    rotationRefYAxis.current += 0.003; // Decrease the angle decrement for faster rotation
                     const angle = rotationRefYAxis.current;
                     // Ensure angle wraps around after 2π radians
                     const wrappedAngle = angle % (2 * Math.PI);
@@ -92,7 +92,7 @@ export default function Home() {
                     ];
                 } else if (axis === 'y') {
                     // Rotate around the center
-                    rotationRefYAxis.current -= 0.004;
+                    rotationRefYAxis.current -= 0.003;
                     const angle = rotationRefYAxis.current;
                     // Ensure angle wraps around after 2π radians
                     const wrappedAngle = angle % (2 * Math.PI);

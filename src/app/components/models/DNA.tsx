@@ -10,20 +10,20 @@ export function DNA(props: any) {
     const object_4 = nodes.Object_4 as Mesh;
     const object_5 = nodes.Object_5 as Mesh;
     const object_6 = nodes.Object_6 as Mesh;
-    const object_7 = nodes.Object_6 as Mesh;
-    const object_8 = nodes.Object_6 as Mesh;
-    const object_9 = nodes.Object_6 as Mesh;
-    const object_10 = nodes.Object_6 as Mesh;
-    const object_11 = nodes.Object_6 as Mesh;
-    const object_12 = nodes.Object_6 as Mesh;
-    const object_13 = nodes.Object_6 as Mesh;
-    const object_14 = nodes.Object_6 as Mesh;
-    const object_15 = nodes.Object_6 as Mesh;
-    const object_16 = nodes.Object_6 as Mesh;
-    const object_17 = nodes.Object_6 as Mesh;
-    const object_18 = nodes.Object_6 as Mesh;
-    const object_19 = nodes.Object_6 as Mesh;
-    const object_20 = nodes.Object_6 as Mesh;
+    const object_7 = nodes.Object_7 as Mesh;
+    const object_8 = nodes.Object_8 as Mesh;
+    const object_9 = nodes.Object_9 as Mesh;
+    const object_10 = nodes.Object_10 as Mesh;
+    const object_11 = nodes.Object_11 as Mesh;
+    const object_12 = nodes.Object_12 as Mesh;
+    const object_13 = nodes.Object_13 as Mesh;
+    const object_14 = nodes.Object_14 as Mesh;
+    const object_15 = nodes.Object_15 as Mesh;
+    const object_16 = nodes.Object_16 as Mesh;
+    const object_17 = nodes.Object_17 as Mesh;
+    const object_18 = nodes.Object_18 as Mesh;
+    const object_19 = nodes.Object_19 as Mesh;
+    const object_20 = nodes.Object_20 as Mesh;
 
     return (
         <group {...props} dispose={null}>
