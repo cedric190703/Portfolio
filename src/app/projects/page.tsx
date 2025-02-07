@@ -35,8 +35,8 @@ const Projects = () => {
     ];
 
     return (
-        <div className="w-full min-h-screen flex flex-col bg-gray-50 p-8 lg:p-16">
-            <Header/>
+        <div className="select-none w-full min-h-screen flex flex-col bg-gray-50 p-8 lg:p-16">
+            <Header />
             <div className="flex flex-grow items-center justify-center">
                 <div className="w-full lg:w-3/4 p-4 lg:p-8 flex flex-col bg-gray-50 items-center text-center">
                     <h1 className="text-5xl font-bold mb-8 text-gray-800">Projects</h1>
@@ -59,19 +59,23 @@ const Projects = () => {
                                 <h3 className="text-3xl font-semibold mb-5 text-gray-900">{project.title}</h3>
                                 <p className="text-lg px-6 mb-5 text-gray-800">{project.description}</p>
                                 <a href={project.url}
-                                   className="mb-5 font-semibold text-2xl text-gray-800 underline hover:text-purple-500">Github
-                                    repository</a>
+                                   className="mb-5 font-semibold text-2xl text-gray-800 underline hover:text-purple-500">
+                                    Github repository
+                                </a>
                             </div>
                         ))}
                     </div>
-                    <h2 className="text-2xl mt-8 font-semibold text-gray-700 mr-2">You can see more projects that I've
-                        done on my</h2>
+                    <h2 className="text-2xl mt-8 font-semibold text-gray-700 mr-2">
+                        You can see more projects that I've done on my
+                    </h2>
                     <a href="https://github.com/cedric190703"
-                       className="font-semibold text-2xl mt-2 text-gray-800 underline hover:text-purple-500">Github</a>
+                       className="font-semibold text-2xl mt-2 text-gray-800 underline hover:text-purple-500">
+                        Github
+                    </a>
                 </div>
             </div>
         </div>
-    );
+    );    
 }
 
 export default Projects;

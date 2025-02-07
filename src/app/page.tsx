@@ -34,13 +34,13 @@ export default function Home() {
 
     useEffect(() => {
         const handleKeyDown = (event: any) => {
-            setHideCard(true);
-            setUserActive(true);
             let newPosition = [...cameraPosition];
             let newEndurancePosition = [...endurancePosition];
             let newCameraRotation = [...cameraRotation];
 
             if (event.key === 'ArrowDown') {
+                setHideCard(true);
+                setUserActive(true);
                 if (axis === 'z' && newPosition[2] < maxZ) {
                     newPosition[2] += 0.01;
                     newEndurancePosition = [
@@ -78,6 +78,8 @@ export default function Home() {
                     ];
                 }
             } else if (event.key === 'ArrowUp') {
+                setUserActive(true);
+                setHideCard(true);
                 if (axis === 'z' && newPosition[2] > minZ) {
                     newPosition[2] -= 0.01;
                     newEndurancePosition = [
@@ -215,7 +217,7 @@ export default function Home() {
     }
 
     return (
-        <main className="w-full h-screen relative overflow-hidden">
+        <main className="w-full h-screen relative overflow-hidden select-none">
             <Canvas
                 className="w-full h-screen bg-transparent"
                 style={{background: 'black'}}
